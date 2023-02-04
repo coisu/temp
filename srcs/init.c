@@ -29,8 +29,6 @@ int	ft_arg_init_mutex(t_arg *arg)
 {
 	int	i;
 
-	if (pthread_mutex_init(&(arg->check), NULL))
-		return (1);
 	if (pthread_mutex_init(&(arg->print), NULL))
 		return (1);
 	arg->forks = malloc(sizeof(pthread_mutex_t) * arg->philo_num);
@@ -57,7 +55,6 @@ int	ft_arg_init(t_arg *arg, int argc, char *argv[])
 	arg->finished_eat = 0;
     arg->finish = 0;
 	arg->num_must_eat = 0;
-	arg->mutex = 0;
 	if (arg->philo_num <= 0 || arg->time_to_die == 0 || arg->time_to_eat == 0
 		|| arg->time_to_sleep == 0)
 		return (5);

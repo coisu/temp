@@ -63,11 +63,8 @@ typedef struct s_arg
 	uint64_t		start_time;
 	int				finished_eat;
     int             finish;
-	int				mutex;
-	pthread_mutex_t	check;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
-	t_philo			*philo;
 }					t_arg;
 
 /* UTILS */
