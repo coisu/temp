@@ -22,6 +22,11 @@ void	ft_philo_check_finish(t_arg *arg, t_philo *philo)
 
 	while (!arg->finish)
 	{
+		printf("check LOCK_START\n");
+		arg->mutex = 1;
+		pthread_mutex_lock(&(arg->check));
+		arg->mutex = 0;
+		printf("check LOCK_END\n");
 		if ((arg->num_must_eat != 0) && (arg->philo_num == arg->finished_eat))
 		{
 			arg->finish = 1;
@@ -40,6 +45,7 @@ void	ft_philo_check_finish(t_arg *arg, t_philo *philo)
 				break ;
 			}
 			i++;
+			// usleep(0);
 		}
 	}
 }
@@ -61,14 +67,11 @@ void	*ft_thread(void *argv)
 			arg->finished_eat++;
 			break ;
 		}
+		// printf("---------HERE\n");
 		ft_philo_printf(arg, philo->num, "is sleeping");
 		ft_pass_time(arg->time_to_sleep, arg);
 		ft_philo_printf(arg, philo->num, "is thinking");
 	}
-		// if (philo->num % 2 == 0)
-	// usleep(50000);
-	// if (!arg->finish)
-	// 	ft_philo_check_finish(arg, philo);
 	return (0);
 }
 
@@ -77,25 +80,14 @@ int	ft_philo_start(t_arg *arg, t_philo *philo)
 	int		i;
 
 	i = 0;
+
 	while (i < arg->philo_num)
 	{	
 		philo[i].last_num_must_eat = ft_get_time();
 		if (pthread_create(&(philo[i].thread), NULL, ft_thread, &(philo[i])))
 			return (1);
 		i++;
-		// i += 2;
-		// ft_philo_check_finish(arg, philo);
 	}
-	// i = 1;
-	// while (i < arg->philo_num)
-	// {	
-	// 	philo[i].last_num_must_eat = ft_get_time();
-	// 	if (pthread_create(&(philo[i].thread), NULL, ft_thread, &(philo[i])))
-	// 		return (1);
-	// 	i += 2;
-	// 	// ft_philo_check_finish(arg, philo);
-	// }
-	usleep(8000);
 	if (!arg->finish)
 		ft_philo_check_finish(arg, philo);
 	i = 0;
