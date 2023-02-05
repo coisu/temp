@@ -34,7 +34,7 @@ int	ft_philo_printf(t_arg *arg, int num, char *msg)
 
 int	ft_philo_action(t_arg *arg, t_philo *philo)
 {
-	if (pthread_mutex_lock(philo->left) == 0)
+	pthread_mutex_lock(philo->left);
 		ft_philo_printf(arg, philo->num, "has taken a fork");
 	if (arg->philo_num > 1)
 	{

@@ -55,7 +55,7 @@ void	*ft_thread(void *argv)
 	philo = argv;
 	arg = philo->arg;
 	if (philo->num % 2)
-		usleep(1000 * arg->time_to_eat);
+		usleep(500 * arg->time_to_eat);
 	while (!arg->finish)
 	{
 		ft_philo_action(arg, philo);
