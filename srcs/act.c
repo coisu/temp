@@ -34,32 +34,35 @@ int	ft_philo_printf(t_arg *arg, int num, char *msg)
 
 int	ft_philo_action(t_arg *arg, t_philo *philo)
 {
-	// printf("left LOCK_START\n");
-	pthread_mutex_lock(philo->left);
-	// printf("left LOCK_END\n");
-	ft_philo_printf(arg, philo->num, "has taken a fork");
+	if (pthread_mutex_lock(philo->left) == 0)
+		ft_philo_printf(arg, philo->num, "has taken a fork");
 	if (arg->philo_num > 1)
 	{
-		// printf("right LOCK_START\n");
+		printf("right LOCK_START\n");
 		pthread_mutex_lock(philo->right);
-		// printf("left LOCK_END\n");
+		printf("left LOCK_END\n");
 		ft_philo_printf(arg, philo->num, "has taken a fork");
 		ft_philo_printf(arg, philo->num, "is eating");
 		philo->last_num_must_eat = ft_get_time();
 		philo->eat_count++;
-		// usleep(arg->time_to_eat * 0.6);
 		ft_pass_time(arg->time_to_eat, arg);
-		// printf("right UNLOCK_START\n");
+		printf("right UNLOCK_START\n");
 		pthread_mutex_unlock(philo->right);
-		// printf("right UNLOCK_END\n");
+		printf("right UNLOCK_END\n");
 	}
 	else
 	{
 		arg->finish = 1;
 		ft_philo_printf(arg, philo->num, "died");
 	}
-	// printf("left UNLOCK_START\n");
+	printf("left UNLOCK_START\n");
 	pthread_mutex_unlock(philo->left);
-	// printf("left UNLOCK_END\n");
+	printf("left UNLOCK_END\n");
 	return (0);
 }
+
+
+	// if (pthread_mutex_lock(p->r_fork) == PTH_SUCCESS)
+	// 	print_message(p, "\e[94mhas taken a fork R\e[0m");
+	// else
+	// 	pthread_mutex_unlock(&(p->info->main_mutex));
