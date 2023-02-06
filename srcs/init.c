@@ -16,8 +16,7 @@ int	ft_philo_init(t_philo **philo, t_arg *arg)
         // (*philo)[i].left = &(arg->forks[i]);
 		(*philo)[i].right = (i + 1) % arg->philo_num;
         // (*philo)[i].right = &(arg->forks[(i + 1) % arg->philo_num]);
-// 원형 테이블이므로 오른쪽 포크는 이렇게 처리.
-		// (*philo)[i].last_eat_time = ft_get_time();
+		(*philo)[i].last_eat_time = ft_get_time();
 		// (*philo)[i].last_eat_time = arg->start_time;
 		(*philo)[i].eat_count = 0;
 		i++;
