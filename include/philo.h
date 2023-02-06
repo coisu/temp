@@ -47,9 +47,11 @@ typedef struct s_philo
 	int				stat;
 	int				starve;
 	int				eat_count;
-	uint64_t		last_num_must_eat;
-	pthread_mutex_t	*right;
-	pthread_mutex_t	*left;
+	uint64_t		last_eat_time;
+	int				right;
+	int				left;
+	// pthread_mutex_t	*right;
+	// pthread_mutex_t	*left;
     pthread_t       thread;
 }					t_philo;
 

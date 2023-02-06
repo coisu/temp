@@ -29,7 +29,7 @@ void	ft_philo_check_finish(t_arg *arg, t_philo *philo)
 		while (i < arg->philo_num)
 		{
 			now = ft_get_time();
-			if ((now - philo[i].last_num_must_eat) >= arg->time_to_die)
+			if ((now - philo[i].last_eat_time) >= arg->time_to_die)
 			{
 				if ((arg->num_must_eat != 0) && (arg->philo_num == arg->finished_eat))
 				{
@@ -78,19 +78,20 @@ int	ft_philo_start(t_arg *arg, t_philo *philo)
 	i = 0;
 	while (i < arg->philo_num)
 	{	
-		philo[i].last_num_must_eat = ft_get_time();
+		philo[i].last_eat_time = ft_get_time();
 		if (pthread_create(&(philo[i].thread), NULL, ft_thread, &(philo[i])))
 			return (1);
-		i += 2;
+		// i += 2;
+		i++;
 	}
-	i = 1;
-	while (i < arg->philo_num)
-	{	
-		philo[i].last_num_must_eat = ft_get_time();
-		if (pthread_create(&(philo[i].thread), NULL, ft_thread, &(philo[i])))
-			return (1);
-		i += 2;
-	}
+	// i = 1;
+	// while (i < arg->philo_num)
+	// {	
+	// 	philo[i].last_eat_time = ft_get_time();
+	// 	if (pthread_create(&(philo[i].thread), NULL, ft_thread, &(philo[i])))
+	// 		return (1);
+	// 	i += 2;
+	// }
 	if (!arg->finish)
 		ft_philo_check_finish(arg, philo);
 	i = -1;
