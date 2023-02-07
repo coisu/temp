@@ -1,5 +1,19 @@
 #include "philo.h"
 
+// int	ft_max(int first, int sec)
+// {
+// 	if (first > sec)
+// 		return (first);
+// 	return (sec);
+// }
+
+// int	ft_min(int first, int sec)
+// {
+// 	if (first < sec)
+// 		return (first);
+// 	return (sec);
+// }
+
 int	ft_philo_init(t_philo **philo, t_arg *arg)
 {
 	int	i;
@@ -12,6 +26,8 @@ int	ft_philo_init(t_philo **philo, t_arg *arg)
 	{
 		(*philo)[i].arg = arg;
 		(*philo)[i].num = i;
+		// (*philo)[i].left = ft_min(i, (i + 1) % arg->philo_num);
+		// (*philo)[i].right = ft_max(i, (i + 1) % arg->philo_num);
 		(*philo)[i].left = i;
         // (*philo)[i].left = &(arg->forks[i]);
 		(*philo)[i].right = (i + 1) % arg->philo_num;
