@@ -6,7 +6,7 @@
 /*   By: jischoi <jischoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 06:08:42 by jischoi           #+#    #+#             */
-/*   Updated: 2023/02/07 08:29:31 by jischoi          ###   ########.fr       */
+/*   Updated: 2023/02/07 08:58:11 by jischoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ static t_philo  *init_philo(int num, t_arg *arg)
         philo[i].last_eat_time = 0;
         philo[i].eat_count = 0;
         philo[i].arg = arg;
-        // philo[i].left = ft_min(i, (i + 1) % num);
-		// philo[i].right = ft_max(i, (i + 1) % num);
-        philo[i].right = i;
-        philo[i].left = (i + 1) % arg->philo_num;
-        		printf("philo %d : L - %d R - %d\n", i , philo[i].left, philo[i].right);
+        philo[i].left = ft_min(i, (i + 1) % num);
+		philo[i].right = ft_max(i, (i + 1) % num);
+        // philo[i].right = i;
+        // philo[i].left = (i + 1) % arg->philo_num;
+        		// printf("philo %d : L - %d R - %d\n", i , philo[i].left, philo[i].right);
 
         if (i % 2 == 0)
             philo[i].rotate_count = arg->philo_num - i - 1;
