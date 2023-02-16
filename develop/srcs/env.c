@@ -14,7 +14,6 @@ char	*get_env(char *var, char **envp, int n)
 		if (n2 < ft_strchr_int(envp[i], '='))
 			n2 = ft_strchr_int(envp[i], '=');
 		if (!ft_strncmp(envp[i], var, n2))
-		
 			return (ft_substr(envp[i], n2 + 1, ft_strlen(envp[i])));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jischoi <jischoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:14:04 by ykuo              #+#    #+#             */
-/*   Updated: 2023/02/08 18:38:32 by jischoi          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:46:38 by jischoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_prompt
 {
 	t_token	*token;
 	t_list	*env;
+	char	*tmp_rep;
 	char	*result;
 	char	**envp;
 	int		has_pipe;
