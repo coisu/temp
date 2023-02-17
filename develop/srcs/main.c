@@ -6,7 +6,7 @@
 /*   By: jischoi <jischoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:12:50 by ykuo              #+#    #+#             */
-/*   Updated: 2023/02/17 00:09:44 by jischoi          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:20:13 by jischoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ int	main(int argc, char **argv, char **envp)
 		else
 			free_all(&prompt);
 	}
+	// free_matrix(&prompt.envp);
 	exit (exit_status);
 }

@@ -1,31 +1,47 @@
 #include "minishell.h"
 
+void	token_exception(t_token *token, t_prompt *p)
+{
+	while (token->str)
+	{
+		if (token->type == OUTPUT)
+		{
+			if (!token->prev || token->prev->type != CMD)
+			{
+				if (token->next->next->type == ARG)
+					token->next->next->type = CMD;
+			}
+		}
+		if (!token->next)
+			break;
+		token = token->next;
+	}
+}
+
 void	fill_type(t_token *token, int separator, t_prompt *p)
 {
 	if (!ft_strcmp(token->str, ""))
 		token->type = EMPTY;
-	else if (!ft_strcmp(token->str, ">") && separator == 0)
+	else if (ft_strchr_int(token->str, '>') >= 0 && separator == 0)
 		token->type = OUTPUT;
 	else if (!ft_strcmp(token->str, ">>") && separator == 0)
 		token->type = APPEN;
-	else if (!ft_strcmp(token->str, "<") && separator == 0)
+	else if (ft_strchr_int(token->str, '<') >= 0 && separator == 0)
 		token->type = INPUT;
 	else if (!ft_strcmp(token->str, "<<") && separator == 0)
 		token->type = DELIM;
-	else if (!ft_strcmp(token->str, "|") && separator == 0)
+	else if (ft_strchr_int(token->str, '|') >= 0 && separator == 0)
 	{
 		token->type = PIPE;
 		p->has_pipe = 1;
 	}
-	else if (separator == ENV_VAL)
-		token->type = ENV_VAL;
 	else if (ft_strchr("-", token->str[0]) && separator == 0)
 		token->type = OPTN;
 	else if (ft_strchr_int(token->str, '=') > 0 && separator == 0)
 		token->type = ENV_DEF;
 	else if (!token->prev || token->prev->type == PIPE)
 		token->type = CMD;
-	else if (token->type != ENV_VAL)
+	else
 		token->type = ARG;
 }
 
